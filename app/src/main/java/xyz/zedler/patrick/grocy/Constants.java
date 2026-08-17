@@ -229,6 +229,12 @@ public final class Constants {
       public final static String KEEP_SCREEN_ON = "recipes_keep_screen_on";
     }
 
+    public final static class NFC {
+
+      public final static String ENABLED = "nfc_enabled";
+      public final static String ACTION = "nfc_action";
+    }
+
     public final static class DEBUGGING {
 
       public final static String ENABLE_DEBUGGING = "enable_debugging";
@@ -350,6 +356,12 @@ public final class Constants {
       public final static boolean KEEP_SCREEN_ON = true;
     }
 
+    public final static class NFC {
+
+      public final static boolean ENABLED = true;
+      public final static String ACTION = NFC_ACTION.PRODUCT_OVERVIEW;
+    }
+
     public final static class DEBUGGING {
 
       public final static boolean ENABLE_DEBUGGING = false;
@@ -403,6 +415,19 @@ public final class Constants {
     public final static String DELETE = "action_delete";
     public final static String COMPLETE = "action_complete";
     public final static String UNDO = "action_undo";
+  }
+
+  public final static class NFC_ACTION {
+
+    public final static String NONE = "nfc_action_none";
+    public final static String PRODUCT_OVERVIEW = "nfc_action_product_overview";
+    public final static String CONSUME = "nfc_action_consume";
+    public final static String CONSUME_ALL = "nfc_action_consume_all";
+    public final static String OPEN = "nfc_action_open";
+    public final static String ADD_TO_SHOPPING_LIST = "nfc_action_add_to_shopping_list";
+    public final static String PURCHASE = "nfc_action_purchase";
+    public final static String TRANSFER = "nfc_action_transfer";
+    public final static String INVENTORY = "nfc_action_inventory";
   }
 
   public final static class ARGUMENT {

@@ -228,6 +228,8 @@ public class BaseFragment extends Fragment {
 
   public void updateBarcodeFormats() {}
 
+  public void updateNfcAction() {}
+
   public void startTransaction() {}
 
   public void startTransaction(boolean open) {}

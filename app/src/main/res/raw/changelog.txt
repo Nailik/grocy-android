@@ -1,5 +1,7 @@
 ## 3.9.0
 
+- New: NFC tags with a grocycode or a link to a page are handled automatically
+- New: Setting to choose which action a scanned NFC tag performs on a product
 - New: Compatibility for Android 17
 - New: Navigation between mealplan and recipe (thanks @Tomahna!) (#976)
 - New: Honeywell CT50/CT60 Scanner support (thanks @jhbruhn!) (#970)

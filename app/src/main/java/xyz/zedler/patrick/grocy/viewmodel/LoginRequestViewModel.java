@@ -447,8 +447,7 @@ public class LoginRequestViewModel extends BaseViewModel {
                 responseListener.onResponse(response);
               }
             },
-            error -> {
-              if (onErrorListener != null) {
+            error -> {if (onErrorListener != null) {
                 onErrorListener.onError(error);
               }
               if (errorListener != null) {

@@ -268,6 +268,32 @@
 
           <LinearLayout
             style="@style/Widget.Grocy.LinearLayout.ListItem.SingleLine.Clickable"
+            android:onClick="@{v -> activity.navUtil.navigate(SettingsFragmentDirections.actionSettingsFragmentToSettingsCatNfcFragment())}"
+            app:clickUtil="@{clickUtil}">
+
+            <ImageView
+              style="@style/Widget.Grocy.ImageView.ListItem.Icon"
+              android:src="@drawable/ic_round_nfc"
+              tools:ignore="ContentDescription" />
+
+            <LinearLayout style="@style/Widget.Grocy.LinearLayout.ListItem.TextBox.Stretch">
+
+              <TextView
+                style="@style/Widget.Grocy.TextView.ListItem.Title"
+                android:text="@string/category_nfc" />
+
+            </LinearLayout>
+
+            <ImageView
+              style="@style/Widget.Grocy.ImageView.Icon"
+              android:layout_marginStart="16dp"
+              android:src="@drawable/ic_round_chevron_right"
+              tools:ignore="ContentDescription" />
+
+          </LinearLayout>
+
+          <LinearLayout
+            style="@style/Widget.Grocy.LinearLayout.ListItem.SingleLine.Clickable"
             android:onClick="@{v -> activity.navUtil.navigate(SettingsFragmentDirections.actionSettingsFragmentToSettingsNotificationsFragment())}"
             app:clickUtil="@{clickUtil}">
 

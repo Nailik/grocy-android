@@ -83,12 +83,14 @@ import xyz.zedler.patrick.grocy.databinding.ActivityMainBinding;
 import xyz.zedler.patrick.grocy.fragment.BaseFragment;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.FeedbackBottomSheet;
 import xyz.zedler.patrick.grocy.helper.DownloadHelper;
+import xyz.zedler.patrick.grocy.helper.NfcActionHelper;
 import xyz.zedler.patrick.grocy.util.ClickUtil;
 import xyz.zedler.patrick.grocy.util.ConfigUtil;
 import xyz.zedler.patrick.grocy.util.HapticUtil;
 import xyz.zedler.patrick.grocy.util.LocaleUtil;
 import xyz.zedler.patrick.grocy.util.NavUtil;
 import xyz.zedler.patrick.grocy.util.NetUtil;
+import xyz.zedler.patrick.grocy.util.NfcUtil;
 import xyz.zedler.patrick.grocy.util.PrefsUtil;
 import xyz.zedler.patrick.grocy.util.ResUtil;
 import xyz.zedler.patrick.grocy.util.ShortcutUtil;
@@ -105,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
   public NavUtil navUtil;
   public NetUtil netUtil;
   public HapticUtil hapticUtil;
+  private NfcUtil nfcUtil;
+  private NfcActionHelper nfcActionHelper;
   private SharedPreferences sharedPrefs;
   private FragmentManager fragmentManager;
   private GrocyApi grocyApi;
@@ -257,6 +261,21 @@ public class MainActivity extends AppCompatActivity {
       );
     }
 
+    // NFC
+
+    nfcUtil = new NfcUtil(this);
+    nfcActionHelper = new NfcActionHelper(this);
+
+    // tags with a grocy deep link are already handled by the navigation graph
+    String nfcPayload = NfcUtil.getPayloadFromIntent(getIntent());
+    if (debug) {
+      Log.i(TAG, "onCreate: launched with " + getIntent() + ", nfc payload " + nfcPayload);
+    }
+    if (nfcPayload != null && !NfcActionHelper.isDeepLink(nfcPayload)
+        && !PrefsUtil.isServerUrlEmpty(sharedPrefs)) {
+      nfcActionHelper.onTagRead(nfcPayload);
+    }
+
     if (VersionUtil.isAppUpdated(sharedPrefs)) {
       // Show changelog if app was updated
       VersionUtil.showChangelogBottomSheet(this);
@@ -279,6 +298,9 @@ public class MainActivity extends AppCompatActivity {
     if (netUtil != null) {
       netUtil.closeWebSocketClient("fragment destroyed");
     }
+    if (nfcActionHelper != null) {
+      nfcActionHelper.destroy();
+    }
     super.onDestroy();
   }
 
@@ -286,6 +308,9 @@ public class MainActivity extends AppCompatActivity {
   protected void onPause() {
     if (netUtil != null) {
       netUtil.cancelHassSessionTimer();
+    }
+    if (nfcUtil != null) {
+      nfcUtil.disableReaderMode();
     }
     super.onPause();
   }
@@ -298,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
     }
     netUtil.createWebSocketClient();
     netUtil.resetHassSessionTimer();
+    updateNfcReaderMode();
     if (!sharedPrefs.contains(Constants.SETTINGS.BEHAVIOR.HAPTIC)) {
       hapticUtil.setEnabled(HapticUtil.areSystemHapticsTurnedOn(this));
     }
@@ -334,6 +360,28 @@ public class MainActivity extends AppCompatActivity {
 
   public BottomScrollBehavior getScrollBehavior() {
     return scrollBehavior;
+  }
+
+  public NfcUtil getNfcUtil() {
+    return nfcUtil;
+  }
+
+  public void updateNfcReaderMode() {
+    if (nfcUtil == null) {
+      return;
+    }
+    boolean enabled = nfcUtil.isSupported()
+        && sharedPrefs.getBoolean(SETTINGS.NFC.ENABLED, SETTINGS_DEFAULT.NFC.ENABLED)
+        && !PrefsUtil.isServerUrlEmpty(sharedPrefs);
+    if (enabled) {
+      nfcUtil.enableReaderMode(payload -> nfcActionHelper.onTagRead(payload));
+    } else {
+      nfcUtil.disableReaderMode();
+    }
+    if (debug) {
+      Log.i(TAG, "updateNfcReaderMode: readerMode=" + enabled
+          + ", hardware=" + nfcUtil.isSupported() + ", turnedOn=" + nfcUtil.isEnabled());
+    }
   }
 
   public void setSystemBarBehavior(SystemBarBehavior systemBarBehavior) {

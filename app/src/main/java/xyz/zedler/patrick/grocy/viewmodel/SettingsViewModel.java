@@ -49,6 +49,7 @@ import xyz.zedler.patrick.grocy.api.GrocyApi;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.BarcodeFormatsBottomSheet;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.InputBottomSheet;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.LocationsBottomSheet;
+import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.NfcActionsBottomSheet;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.ProductGroupsBottomSheet;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.QuantityUnitsBottomSheet;
 import xyz.zedler.patrick.grocy.fragment.bottomSheetDialog.ShoppingListsBottomSheet;
@@ -397,6 +398,21 @@ public class SettingsViewModel extends BaseViewModel {
   public void setExternalScannerEnabled(boolean enabled) {
     sharedPrefs.edit().putBoolean(Constants.SETTINGS.SCANNER.EXTERNAL_SCANNER, enabled).apply();
     getExternalScannerEnabledLive.setValue(enabled);
+  }
+
+  public boolean getNfcEnabled() {
+    return sharedPrefs.getBoolean(
+        Constants.SETTINGS.NFC.ENABLED,
+        Constants.SETTINGS_DEFAULT.NFC.ENABLED
+    );
+  }
+
+  public void setNfcEnabled(boolean enabled) {
+    sharedPrefs.edit().putBoolean(Constants.SETTINGS.NFC.ENABLED, enabled).apply();
+  }
+
+  public void showNfcActionsBottomSheet() {
+    showBottomSheet(new NfcActionsBottomSheet());
   }
 
   public void loadShoppingLists() {

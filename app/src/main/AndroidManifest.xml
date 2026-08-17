@@ -69,6 +69,7 @@
     <activity
       android:name=".activity.MainActivity"
       android:windowSoftInputMode="adjustNothing"
+        android:permission="android.permission.DISPATCH_NFC_MESSAGE"
       android:exported="true">
 
       <intent-filter>
@@ -79,6 +80,16 @@
         <category android:name="android.intent.category.BROWSABLE" />
 
         <data android:scheme="grocy" />
+      </intent-filter>
+
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:scheme="grcy" />
       </intent-filter>
 
     </activity>

@@ -533,6 +533,9 @@
         android:id="@+id/action_settingsFragment_to_settingsCatScannerFragment"
         app:destination="@id/settingsCatScannerFragment" />
       <action
+        android:id="@+id/action_settingsFragment_to_settingsCatNfcFragment"
+        app:destination="@id/settingsCatNfcFragment" />
+      <action
         android:id="@+id/action_settingsFragment_to_settingsCatNetworkFragment"
         app:destination="@id/settingsCatNetworkFragment" />
       <action
@@ -590,6 +593,15 @@
       <deepLink
         android:id="@+id/deepLink11"
         app:uri="@string/deep_link_settingsCatScannerFragment" />
+    </fragment>
+    <fragment
+      android:id="@+id/settingsCatNfcFragment"
+      android:name="xyz.zedler.patrick.grocy.fragment.SettingsCatNfcFragment"
+      android:label="SettingsCatNfcFragment"
+      tools:layout="@layout/fragment_settings_cat_nfc">
+      <deepLink
+        android:id="@+id/deepLink21"
+        app:uri="@string/deep_link_settingsCatNfcFragment" />
     </fragment>
     <fragment
       android:id="@+id/settingsCatStockFragment"

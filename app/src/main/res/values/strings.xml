@@ -449,6 +449,8 @@
   <!-- Note for app maintainers: Only relevant for Play Store and GitHub variant, it's here because strings for Transifex must be in master branch. -->
   <string name="msg_help_barcode_scanner_info_mlkit">ML Kit uses machine learning with the latest technologies for barcode scanning.\n\n- Almost no incorrect results\n- Orientation doesn\'t matter\n- Even works for fuzzy or low contrast barcodes\n- Is performed completely offline on your device\n- Framework is not open source</string>
   <string name="msg_help_external_scanner_ready">You can use an external scanner for the field below while it\'s focused and empty.</string>
+  <string name="msg_help_nfc">Tags can contain a grocycode, which is printed on Grocy labels, or a link to a specific page of this app. The configured action runs as soon as a tag is held against the device while the app is open.</string>
+  <string name="msg_nfc_not_supported">This device has no NFC hardware, so tags cannot be read.</string>
   <string name="msg_help_external_scanner_settings">This app supports external scanner devices which act as a keyboard and can be connected via USB or Bluetooth. The following options must be configured in your external scanner:\n\nPrefix: None\nSuffix: TAB or ENTER</string>
   <!--The same string is also in the web interface: Consume form -> tiny help symbols (maybe you can get the translation from there to prevent different translations for the same string) -->
   <string name="msg_help_specific_item">The first item in this list would be picked by the default rule which is \"Opened first, then first due first, then first in first out\".</string>
@@ -565,6 +567,7 @@
   <string name="error_no_product_details">Could not get product details</string>
   <string name="error_failed_barcode_upload">Could not upload barcode</string>
   <string name="error_wrong_grocycode_type">grocycode contains wrong entity type</string>
+  <string name="error_nfc_no_grocycode">NFC tag contains no grocycode</string>
   <string name="error_stock_entry_grocycode">Stock entry from grocycode not found</string>
   <string name="error_picture_uploads_forbidden">For security reasons, uploading pictures is only allowed on self-hosted servers. You are currently using the demo instance.</string>
   <string name="error_permission">No permission for this action</string>
@@ -1171,6 +1174,8 @@
   <string name="category_scanner">Scanner</string>
   <string name="category_scanner_camera">Camera scanner</string>
   <string name="category_scanner_external">External scanner</string>
+  <string name="category_nfc">NFC</string>
+  <string name="category_nfc_action">Action for products</string>
   <string name="category_appearance">Appearance</string>
   <string name="category_network">Network</string>
   <string name="category_network_proxy">Proxy</string>
@@ -1224,6 +1229,29 @@
   <string name="setting_barcode_formats_description_all">Not restricted</string>
   <string name="setting_external_support">External scanner support</string>
   <string name="setting_external_support_description">Via USB or Bluetooth</string>
+  <string name="setting_nfc">Read NFC tags</string>
+  <string name="setting_nfc_description">Scan tags while the app is open</string>
+  <string name="setting_nfc_action">Action after scanning</string>
+  <string name="setting_nfc_action_description">Only used for tags with a grocycode</string>
+  <string name="setting_nfc_action_info">Tags containing a link to a specific page always open that page.</string>
+  <string name="setting_nfc_action_product_overview">Open product</string>
+  <string name="setting_nfc_action_product_overview_description">Show the product overview</string>
+  <string name="setting_nfc_action_consume">Consume product</string>
+  <string name="setting_nfc_action_consume_description">Consume the default amount</string>
+  <string name="setting_nfc_action_consume_all">Consume all</string>
+  <string name="setting_nfc_action_consume_all_description">Set the stock amount to 0</string>
+  <string name="setting_nfc_action_open">Mark as opened</string>
+  <string name="setting_nfc_action_open_description">Open the default amount</string>
+  <string name="setting_nfc_action_add_to_shopping_list">Add to shopping list</string>
+  <string name="setting_nfc_action_add_to_shopping_list_description">Open the shopping list item form</string>
+  <string name="setting_nfc_action_purchase">Purchase product</string>
+  <string name="setting_nfc_action_purchase_description">Open the purchase page</string>
+  <string name="setting_nfc_action_transfer">Transfer product</string>
+  <string name="setting_nfc_action_transfer_description">Open the transfer page</string>
+  <string name="setting_nfc_action_inventory">Inventory product</string>
+  <string name="setting_nfc_action_inventory_description">Open the inventory page</string>
+  <string name="setting_nfc_action_none">Do nothing</string>
+  <string name="setting_nfc_action_none_description">Ignore tags with a grocycode</string>
   <string name="setting_reload_config">Reload configuration</string>
   <string name="setting_reload_config_description">App restart required</string>
   <string name="setting_logout">Logout</string>
